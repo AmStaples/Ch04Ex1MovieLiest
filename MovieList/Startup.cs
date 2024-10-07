@@ -25,6 +25,7 @@ namespace MovieList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MovieContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieContext")));
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
