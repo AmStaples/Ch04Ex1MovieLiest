@@ -4,6 +4,7 @@ namespace MovieList.Models
 {
     public class Movies
     {
+        [Key]
         public int MovieId { get; set; }
 
         [Required(ErrorMessage = "Please enter a name.")]
