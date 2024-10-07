@@ -26,6 +26,11 @@ namespace MovieList
         {
             services.AddDbContext<MovieContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieContext")));
             services.AddControllersWithViews();
+            services.AddRouting(options =>
+            {
+                options.LowercaseUrls = true;
+                options.AppendTrailingSlash = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +56,7 @@ namespace MovieList
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}");
             });
         }
     }
