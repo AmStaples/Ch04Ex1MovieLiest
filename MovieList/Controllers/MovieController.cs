@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using MovieList.Models;
+using System.Linq;
 namespace MovieList.Controllers
 {
     public class MovieController : Controller
@@ -16,6 +17,7 @@ namespace MovieList.Controllers
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
+            ViewBag.Genres = context.Genres.OrderBy(g => g.Name).ToList();
             return View("Edit", new Movies());
         }
 
@@ -23,6 +25,7 @@ namespace MovieList.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
+            ViewBag.Genres = context.Genres.OrderBy(g => g.Name).ToList();
             var movie = context.Movies.Find(id);
             return View(movie);
         }
@@ -39,6 +42,7 @@ namespace MovieList.Controllers
             } else
             {
                 ViewBag.Action = (movie.MovieId == 0) ? "Add" : "Edit";
+                ViewBag.Genres = context.Genres.OrderBy(g => g.Name).ToList();
                 return View(movie);
             }
         }
